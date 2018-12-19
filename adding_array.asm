@@ -3,7 +3,7 @@
 .DATA
     arr1 db 1, 3, 4, 2, 5
     arr2 db 3, 4, 2, 1, 4
-    sum db 5 0, 0, 0, 0, 0
+    sum db 5 DUP(0)
     
 .CODE
   
@@ -12,24 +12,25 @@
         mov ax, @data
         mov ds, ax
         
-        lea si, arr1
-        lea di, arr2
-        lea bx, sum
+        mov si, offset arr1
+        mov di, offset arr2
+        mov bx, offset sum
+        mov cx, 5
         
-        mov cx, 5h
         
    loop1:
         mov al, [si]
         add al, [di]
         mov [bx], al
         
+        
+        inc si
+        inc di
         inc bx
-        inc si
-        inc si
         
         loop loop1
         
-       mov ah, 4ch
-       int 21h
+       ;mov ah, 4ch
+       ;int 21h
        
        end start
