@@ -1,0 +1,74 @@
+org 100h
+mov bx, offset arr1
+mov si, offset arr2
+mov di, offset arr3
+
+mov cl,0
+mov ch,0
+
+Input1:
+mov ah,1
+int 21h
+cmp al, 0dh
+jz DoneWith1
+mov [bx],al
+inc bx
+inc cl
+jmp Input1
+
+DoneWith1:
+mov [bx],'$'
+
+
+
+Input2:
+mov ah,1
+int 21h
+cmp al, 0dh
+jz DoneWith2
+mov [SI],al
+inc si
+inc ch
+jmp Input2
+
+
+DoneWith2:
+mov [si], '$'
+mov bx, offset arr1
+mov si, offset arr2
+
+
+Copy1:
+mov al, [bx]
+inc bx
+cmp al, '$'
+JZ Copy2
+mov [di],al
+inc di
+jmp Copy1
+
+
+Copy2:
+mov al,[si]
+inc si
+cmp al,'$'
+JZ Done
+mov [di],al
+inc di
+jmp Copy2
+                                                                                                                                                                                                                    
+Done:
+mov [di],'$'
+mov dx, offset arr3
+mov ah, 9
+int 21h      
+      
+
+
+ret
+arr1 dB 5 dup(?)
+arr2 db 5 dup(?)
+arr3 db 15 dup(?)
+
+
+
