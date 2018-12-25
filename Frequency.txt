@@ -1,0 +1,15 @@
+org 100h
+mov BX, offset arr1
+mov SI, offset arr2 
+mov CX, 10  
+mov ah, 0
+freq:
+    mov AL, [bx]
+    inc BX
+    add SI, AX  
+    inc [SI] 
+    sub SI, AX
+    loop freq
+ret
+arr1 dB 10 dup(0,3,3,4,7,7,7,7,9,9)
+arr2 dB 11 dup(?)

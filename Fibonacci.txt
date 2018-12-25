@@ -1,0 +1,22 @@
+org 100h
+
+mov bx, offset arr
+
+mov [bx], 0
+inc bx
+mov [bx],1
+inc bx
+
+mov cx, 8
+
+Fib:
+    mov al, [bx-1]
+    mov dl, [bx-2]
+    add al,dl
+    mov [bx], al  
+    inc bx
+    loop Fib
+
+ret
+
+arr dB 10 dup(?)

@@ -1,0 +1,33 @@
+.MODEL SMALL
+.STACk 100h
+
+.DATA
+ARR DB 1,11,25,3,21,8,6,7,5,10
+LARGE DB ?
+
+.CODE
+
+ASSUME DS:DATA CS:CODE
+
+    START:
+        MOV AX,DATA
+        MOV DS,AX
+        LEA SI,ARR
+        MOV AL,ARR[SI]
+        MOV LARGE,AL
+        MOV CX,10
+    
+    REPEAT:
+        MOV AL,ARR[SI]
+        CMP LARGE,AL
+        JG NOCHANGE
+        MOV LARGE,AL
+
+    NOCHANGE:
+        INC SI
+        LOOP REPEAT
+        
+MOV AH,4CH
+INT 21H
+CODE ENDS
+END START
